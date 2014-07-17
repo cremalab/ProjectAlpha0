@@ -22,7 +22,6 @@ class TaskBoard < ActiveRecord::Base
     tag = nil
 
     tasks.each do |task|
-      #p task["name"]
       if task["name"] =~ /(.*):$/
         tag = task["name"][0..-2]
       else
@@ -43,10 +42,8 @@ class TaskBoard < ActiveRecord::Base
 
   def get_daily_stage_values
     stages = self.tasks.select(:stage).map(&:stage).uniq
-    p stages
     stages.each do |stage|
       amount = self.tasks.where(stage: stage).length
-      p stage
       daily_stage_value = self.daily_stage_values.where(name: stage, created_at: (Time.now.midnight)..Time.now.midnight + 1.day)
       if daily_stage_value.empty?
         DailyStageValue.create(name: stage, amount: amount, task_board_id: self.id)
