@@ -1,0 +1,2 @@
+module DailyStageValuesHelper
+end
