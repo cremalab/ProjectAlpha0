@@ -69,6 +69,8 @@ class TaskBoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_board_params
-      params[:task_board]
+      params.require(:task_board).permit(
+        :active
+      )
     end
 end

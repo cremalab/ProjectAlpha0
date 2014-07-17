@@ -5,6 +5,8 @@
     <tr>
       <th>Stripe ID</th>
       <th>Name</th>
+      <th>Active</th>
+      <th>Create At</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +16,9 @@
       <tr>
         <td><%= task_board.stripe_id%></td>
         <td><%= task_board.name%></td>
+        <td><%= task_board.active%></td>
+        <td><%= task_board.created_at%></td>
+
         <td><%= link_to 'Show', task_board %></td>
         <td><%= link_to 'Edit', edit_task_board_path(task_board) %></td>
         <td><%= link_to 'Destroy', task_board, method: :delete, data: { confirm: 'Are you sure?' } %></td>

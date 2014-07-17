@@ -8,7 +8,7 @@ namespace :get_information do
     api_key = "1TbckKlf.HEIYurEMmUSJie30cOlZyFl"
     workspace_id = "287827460117"
     TaskBoard.get_task_boards(api_key, workspace_id)
-    task_boards = TaskBoard.all
+    task_boards = TaskBoard.where(active: true)
 
     task_boards.each do |task_board|
       task_board.get_tasks(task_board.stripe_id, api_key)
@@ -19,7 +19,7 @@ namespace :get_information do
   end
 
   task asana_daily_stage: :environment do
-    task_boards = TaskBoard.all
+    task_boards = TaskBoard.where(active: true)
 
     task_boards.each do |task_board|
       task_board.get_daily_stage_values
