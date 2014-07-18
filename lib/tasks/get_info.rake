@@ -5,7 +5,7 @@ require "pp"
 namespace :get_information do
 
   task asana_tasks: :environment do
-    api_key = "1TbckKlf.HEIYurEMmUSJie30cOlZyFl"
+    api_key = ENV["API_KEY"]
     workspace_id = "287827460117"
     TaskBoard.get_task_boards(api_key, workspace_id)
 
