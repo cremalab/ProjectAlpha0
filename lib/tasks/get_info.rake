@@ -5,9 +5,14 @@ require "pp"
 namespace :get_information do
 
   task asana_tasks: :environment do
-    api_key = ENV["API_KEY"]
+    api_key = ENV["API_KEY"] || "1yUAbKca.x0vY6b9yDaz4Y2nQDVTJGAX"
     workspace_id = "287827460117"
+
+    Employee.get_employees(api_key, workspace_id)
+    exit()
     TaskBoard.get_task_boards(api_key, workspace_id)
+
+
 
     task_boards = TaskBoard.where(active: true)
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718202359) do
+ActiveRecord::Schema.define(version: 20140718221244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,18 @@ ActiveRecord::Schema.define(version: 20140718202359) do
   end
 
   add_index "daily_stage_values", ["task_board_id"], name: "index_daily_stage_values_on_task_board_id", using: :btree
+
+  create_table "employees", force: true do |t|
+    t.string   "name"
+    t.string   "asana_id"
+    t.string   "harvest_id"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "employee_id"
+  end
+
+  add_index "employees", ["employee_id"], name: "index_employees_on_employee_id", using: :btree
 
   create_table "task_boards", force: true do |t|
     t.string   "stripe_id"

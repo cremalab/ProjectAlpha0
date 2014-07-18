@@ -17,11 +17,15 @@ class TaskBoard < ActiveRecord::Base
   end
 
   def get_tasks(task_board_id, api_key)
-    uri = URI.parse("https://app.asana.com/api/1.0/projects/#{task_board_id}/tasks/")
+    url = "https://app.asana.com/api/1.0/projects/#{task_board_id}/tasks"
+    params = "?opt_fields=assignee,name"
+    uri = URI.parse(url + params)
     tasks = HttpHelper.get_request(uri, api_key)
     tag = nil
 
     tasks.each do |task|
+      p "Tasks"
+      p task
       if task["name"] =~ /.*:$/
         tag = task["name"][0..-2]
       else
@@ -48,11 +52,12 @@ class TaskBoard < ActiveRecord::Base
       sum = 0
       total_hours.each {|x| sum += x}
       total_hours = sum
+      if stage.nil?
+        stage = "(No Heading)"
+      end
+
       daily_stage_value = self.daily_stage_values.where(name: stage, created_at: (Time.now.midnight)..Time.now.midnight + 1.day)
       if daily_stage_value.empty?
-        if stage.nil?
-          stage = "(No Heading)"
-        end
 
         DailyStageValue.create(name: stage, amount: amount, task_board_id: self.id, total_hours: total_hours)
       end

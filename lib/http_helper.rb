@@ -10,7 +10,7 @@ class HttpHelper
       "Content-Type" => "application/json"
     }
 
-    req = Net::HTTP::Get.new(uri.path, header)
+    req = Net::HTTP::Get.new(uri, header)
     req.basic_auth(api_key, '')
     res = http.start { |http| http.request(req) }
     body = JSON.parse(res.body)

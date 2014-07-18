@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
   belongs_to :task_board
+  belongs_to :employee
 
   def set_hours
     hour_regex = [/\d*\.?\d*\s?hr?/]
