@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 ruby "2.0.0"
 
 
@@ -7,7 +7,6 @@ gem 'rails', '4.1.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -34,6 +33,13 @@ gem 'rails_12factor', group: :production
 
 # Use unicorn as the app server
 gem 'unicorn'
+
+gem 'activeadmin', github: 'gregbell/active_admin'
+
+gem 'sass-rails', github: 'rails/sass-rails'
+
+gem "devise"
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
