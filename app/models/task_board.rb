@@ -8,7 +8,7 @@ class TaskBoard < ActiveRecord::Base
 
     projects.each do |project|
       if project["name"] =~ /(.*) - Task Board$/
-        task_board = self.where(name: project["name"])
+        task_board = TaskBoard.where(stripe_id: project["id"].to_s)
         if task_board.empty?
           self.create(name: project["name"], stripe_id: project["id"])
         end
@@ -22,19 +22,18 @@ class TaskBoard < ActiveRecord::Base
     tag = nil
 
     tasks.each do |task|
-      if task["name"] =~ /(.*):$/
+      if task["name"] =~ /.*:$/
         tag = task["name"][0..-2]
       else
         a_task = Task.where(stripe_id: task["id"].to_s, created_at: (Time.now.midnight)..Time.now.midnight + 1.day)
-        p a_task
         if a_task.empty?
-          Task.create(
+          a_task = Task.create(
             stripe_id: task["id"].to_s,
             name: task["name"],
             task_board_id: self.id,
-            stage: tag,
-            assigned_hour: "Later"
+            stage: tag
           )
+          a_task.set_hours
         end
       end
     end
@@ -44,9 +43,18 @@ class TaskBoard < ActiveRecord::Base
     stages = self.tasks.select(:stage).map(&:stage).uniq
     stages.each do |stage|
       amount = self.tasks.where(stage: stage).length
+      total_hours = self.tasks.where(stage: stage).pluck(:assigned_hour)
+      total_hours = total_hours.compact.map {|x| x.to_f}
+      sum = 0
+      total_hours.each {|x| sum += x}
+      total_hours = sum
       daily_stage_value = self.daily_stage_values.where(name: stage, created_at: (Time.now.midnight)..Time.now.midnight + 1.day)
       if daily_stage_value.empty?
-        DailyStageValue.create(name: stage, amount: amount, task_board_id: self.id)
+        if stage.nil?
+          stage = "(No Heading)"
+        end
+
+        DailyStageValue.create(name: stage, amount: amount, task_board_id: self.id, total_hours: total_hours)
       end
     end
   end

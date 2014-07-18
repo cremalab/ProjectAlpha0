@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Stripe ID</th>
       <th>Name</th>
       <th>Active</th>
@@ -14,6 +15,8 @@
   <tbody>
     <% @task_boards.each do |task_board| %>
       <tr>
+        <td><%= task_board.id%></td>
+
         <td><%= task_board.stripe_id%></td>
         <td><%= task_board.name%></td>
         <td><%= task_board.active%></td>

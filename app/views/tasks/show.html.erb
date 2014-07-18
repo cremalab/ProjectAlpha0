@@ -1,4 +1,25 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Stripe ID</strong>
+  <%= @task.stripe_id %>
+</p>
+
+<p>
+  <strong>Name</strong>
+  <%= @task.name %>
+</p>
+
+<strong>Stage</strong>
+  <%= @task.stage %>
+</p>
+
+<strong>Create At</strong>
+  <%= @task.created_at %>
+</p>
+
+
+
+
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

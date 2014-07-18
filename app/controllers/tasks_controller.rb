@@ -4,7 +4,11 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    if params[:task_board_id]
+      @tasks = TaskBoard.find(params[:task_board_id]).tasks
+    else
+      @daily_stage_values = Task.all
+    end
   end
 
   # GET /tasks/1

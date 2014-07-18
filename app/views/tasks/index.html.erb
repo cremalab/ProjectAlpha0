@@ -7,6 +7,9 @@
       <th>Name</th>
       <th>Stage</th>
       <th>Assigned Hour</th>
+      <th>Task Board</th>
+      <th>Created At</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,7 +21,8 @@
         <td><%= task.name%></td>
         <td><%= task.stage%></td>
         <td><%= task.assigned_hour%></td>
-
+        <td><%= task.task_board.name%></td>
+        <td><%= task.created_at%></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
