@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     if params[:task_board_id]
       @tasks = TaskBoard.find(params[:task_board_id]).tasks
     else
-      @daily_stage_values = Task.all
+      @tasks = Task.all
     end
   end
 
