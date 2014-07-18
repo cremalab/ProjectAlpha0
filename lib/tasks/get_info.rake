@@ -9,7 +9,6 @@ namespace :get_information do
     workspace_id = "287827460117"
 
     Employee.get_employees(api_key, workspace_id)
-    exit()
     TaskBoard.get_task_boards(api_key, workspace_id)
 
 
