@@ -46,8 +46,9 @@ class TaskBoard < ActiveRecord::Base
   def get_daily_stage_values
     stages = self.tasks.select(:stage).map(&:stage).uniq
     stages.each do |stage|
-      amount = self.tasks.where(stage: stage).length
-      total_hours = self.tasks.where(stage: stage).pluck(:assigned_hour)
+      tasks = self.tasks.where(stage: stage, created_at: (Time.now.midnight)..Time.now.midnight + 1.day)
+      amount = tasks.length
+      total_hours = tasks.pluck(:assigned_hour)
       total_hours = total_hours.compact.map {|x| x.to_f}
       sum = 0
       total_hours.each {|x| sum += x}
