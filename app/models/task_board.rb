@@ -24,18 +24,23 @@ class TaskBoard < ActiveRecord::Base
     tag = nil
 
     tasks.each do |task|
-      p "Tasks"
-      p task
       if task["name"] =~ /.*:$/
         tag = task["name"][0..-2]
       else
+        p "Tasks"
+        p task
+        # p task["assignee"]
+        if task["assignee"]
+          employee_id = Employee.find_by_asana_id(task["assignee"]["id"].to_s).id
+        end
         a_task = Task.where(stripe_id: task["id"].to_s, created_at: (Time.now.midnight)..Time.now.midnight + 1.day)
         if a_task.empty?
           a_task = Task.create(
             stripe_id: task["id"].to_s,
             name: task["name"],
             task_board_id: self.id,
-            stage: tag
+            stage: tag,
+            employee_id: employee_id
           )
           a_task.set_hours
         end
