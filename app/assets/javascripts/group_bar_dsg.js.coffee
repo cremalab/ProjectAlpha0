@@ -45,7 +45,8 @@ $ ->
     for i in [0..final_structure.length - 1]
       for j in [0..final_structure[i].length - 1]
         final_structure[i][j].y = final_structure[i][j].total_hours
-        final_structure[i][j].time = final_structure[i][j].created_at
+        console.log final_structure[i][j].created_at
+        final_structure[i][j].time = new Date(final_structure[i][j].created_at).setHours(0, 0, 0)
 
     stack(final_structure)
 
@@ -54,8 +55,10 @@ $ ->
     last_date = new Date(final_structure[0][final_structure[0].length-1].created_at)
 
     xScale = d3.time.scale()
-      .domain([first_date, d3.time.day.offset(last_date,14)])
-      .rangeRound([0, w - padding.left - padding.right]);
+      .domain([d3.time.day.offset(last_date,-14), last_date])
+      .rangeRound([0, w - padding.left - padding.right])
+
+    console.log xScale
 
     yScale = d3.scale.linear()
       .domain([0,
@@ -70,6 +73,7 @@ $ ->
       .scale(xScale)
       .orient("bottom")
       .ticks(d3.time.days,1)
+      .tickPadding(5)
 
     yAxis = d3.svg.axis()
       .scale(yScale)
@@ -114,8 +118,7 @@ $ ->
         return 500 * i;
       .ease("linear")
       .attr "x", (d) ->
-          console.log xScale(new Date(d.time))
-          return xScale(new Date(d.time))
+          return xScale(new Date(d.time)) - 9
       .attr "y", (d) ->
         return -(- yScale(d.y0) - yScale(d.y) + (h - padding.top - padding.bottom)*2);
       .attr "height", (d) ->
