@@ -3,20 +3,20 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
   $.getJSON '/daily_stage_values','json', (data) ->
-    w = 850
+    w = 900
     h = 500
-    padding = {top: 100, right: 100, bottom: 100, left:100}
+    padding = {top: 100, right: 150, bottom: 100, left:100}
     stack = d3.layout.stack(data)
 
     color_hash = {
-      0: ["Done", "#653A3C"],
-      1: ["Deployed - Production", "#936264"],
-      2: ["Ready for Production", "#B48889"],
-      3: ["Deployed - Staging", "#DAB8B9"],
-      4: ["Merged", "#325230"],
-      5: ["In Progress", "#527950"],
-      6: ["To Do", "#71936F"],
       7: ["(No Heading)", "#98B296"]
+      6: ["To Do", "#71936F"],
+      5: ["In Progress", "#527950"],
+      4: ["Merged", "#325230"],
+      3: ["Deployed - Staging", "#DAB8B9"],
+      2: ["Ready for Production", "#B48889"],
+      1: ["Deployed - Production", "#936264"],
+      0: ["Done", "#653A3C"],
     }
 
     data_structure = {
@@ -73,7 +73,7 @@ $ ->
       .scale(xScale)
       .orient("bottom")
       .ticks(d3.time.days,1)
-      .tickPadding(5)
+      # .tickPadding(5)
 
     yAxis = d3.svg.axis()
       .scale(yScale)
@@ -153,14 +153,14 @@ $ ->
         .each (d,i) ->
           g = d3.select(this);
           g.append("rect")
-            .attr("x", w - padding.right - 65)
+            .attr("x", w - padding.right + 0)
             .attr("y", i*25 + 10)
             .attr("width", 10)
             .attr("height",10)
             .style("fill",color_hash[String(i)][1])
 
           g.append("text")
-           .attr("x", w - padding.right - 50)
+           .attr("x", w - padding.right + 15)
            .attr("y", i*25 + 20)
            .attr("height",30)
            .attr("width",100)
