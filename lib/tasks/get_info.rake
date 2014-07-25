@@ -11,7 +11,7 @@ namespace :get_information do
     Employee.get_employees(api_key, workspace_id)
     TaskBoard.get_task_boards(api_key, workspace_id)
 
-
+    Task.where("created_at < ?", DateTime.now - 5.day).destroy_all
 
     task_boards = TaskBoard.where(active: true)
 

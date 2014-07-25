@@ -40,6 +40,8 @@ gem 'sass-rails', github: 'rails/sass-rails'
 
 gem "devise"
 
+gem "d3-rails"
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
