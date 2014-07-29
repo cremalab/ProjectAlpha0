@@ -3,29 +3,20 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
   $.getJSON '/daily_stage_values','json', (data) ->
-    final_structure = setup_data(data)
 
-    build_graph(final_structure)
+    build_graph(data)
+    w = 900
 
 
-    d3.selectAll(".m")
-      .on( "click", () ->
-        project = this.getAttribute("value")
-        console.log project
-        final_structure = setup_data(data)
 
-        console.log final_structure
 
-        build_graph(final_structure)
-
-      )
-
-setup_data = (data) ->
+setup_data = (data, task_board) ->
   stack = d3.layout.stack(data)
   data_structure = {
     "Done": [],
     "Deployed - Production": [],
     "Ready for Production": [],
+    "Verify": [],
     "Deployed - Staging": [],
     "Merged": [],
     "In Progress": [],
@@ -36,7 +27,9 @@ setup_data = (data) ->
 
 
   for i in [0..data.length - 1]
-    if data[i].task_board.name == "LC - Task Board"
+    if data[i].task_board.name == task_board
+      console.log data[i].name
+      console.log data_structure[data[i].name]
       data_structure[data[i].name].push data[i]
 
   final_structure = []
@@ -57,37 +50,13 @@ setup_data = (data) ->
 
 
 build_graph = (data) ->
-  svg = d3.select("#mbars")
-    .append("svg")
-    .attr("width", w)
-    .attr("height", h)
-
-
-  console.log svg.selectAll("g")
-  console.log svg.selectAll("g")[0].length
-
-  if svg.selectAll("g") > 0
-    console.log "Here"
-    rect
-      .exit()
-      .transition()
-      .duration(1000)
-      .ease("circle")
-      .attr("x",w)
-      .remove()
-
-    groups
-      .exit()
-      .transition()
-      .duration(1000)
-      .ease("circle")
-      .attr("x",w)
-      .remove()
+  normalized_data = setup_data(data, "LC - Task Board")
 
   color_hash = {
     7: ["(No Heading)", "#98B296"],
     6: ["To Do", "#71936F"],
     8: ["To Do", "#71936F"],
+    9: ["On Hold", "#DAB8B9"]
     5: ["In Progress", "#527950"],
     4: ["Merged", "#325230"],
     3: ["Deployed - Staging", "#DAB8B9"],
@@ -100,9 +69,9 @@ build_graph = (data) ->
   h = 500
   padding = {top: 100, right: 150, bottom: 100, left:100}
 
-  first_date = new Date(data[0][0].created_at)
+  first_date = new Date(normalized_data[0][0].created_at)
 
-  last_date = new Date(data[0][data[0].length-1].created_at)
+  last_date = new Date(normalized_data[0][normalized_data[0].length-1].created_at)
 
   xScale = d3.time.scale()
     .domain([d3.time.day.offset(last_date,-14), last_date])
@@ -110,7 +79,7 @@ build_graph = (data) ->
 
   yScale = d3.scale.linear()
     .domain([0,
-      d3.max data, (d)  ->
+      d3.max normalized_data, (d)  ->
           return d3.max d, (d) ->
             return d.y + d.y0;
     ])
@@ -129,19 +98,19 @@ build_graph = (data) ->
 
   colors = d3.scale.category10()
 
-  # svg = d3.select("#mbars")
-  #   .append("svg")
-  #   .attr("width", w)
-  #   .attr("height", h)
+  svg = d3.select("#mbars")
+    .append("svg")
+    .attr("width", w)
+    .attr("height", h)
 
   groups = svg.selectAll("g")
-    .data(data)
+    .data(normalized_data)
     .enter()
     .append("g")
     .attr("class", "rgroups")
     .attr("transform", "translate(" + padding.left + "," + (h - padding.bottom) + ")")
     .style("fill", (d, i) ->
-      return color_hash[data.indexOf(d)][1]
+      return color_hash[normalized_data.indexOf(d)][1]
     )
 
 
@@ -176,7 +145,7 @@ build_graph = (data) ->
     svg.append("g")
       .attr("class","y axis")
       .attr("transform","translate(" + padding.left + "," + padding.top + ")")
-      .call(yAxis);
+      .call(yAxis)
 
 
     # Adding a legend
@@ -187,7 +156,7 @@ build_graph = (data) ->
       .attr("height", 100)
       .attr("width",100)
 
-    legend.selectAll("g").data(data)
+    legend.selectAll("g").data(normalized_data)
       .enter()
       .append('g')
       .each (d,i) ->
@@ -220,6 +189,94 @@ build_graph = (data) ->
       .attr("y",h - 55)
       .attr("text-anchor","middle")
       .text("Days")
+
+    d3.selectAll(".m")
+      .on("click", () ->
+        project = this.getAttribute("value")
+        console.log project
+        normalized_data = setup_data(data, project)
+        console.log normalized_data
+
+        xScale.domain([new Date(0, 0, 0,normalized_data[0][0].time,0, 0, 0),new Date(0, 0, 0,normalized_data[0][normalized_data[0].length-1].time,0, 0, 0)])
+          .rangeRound([0, w-padding.left-padding.right])
+
+        yScale.domain([0,
+          d3.max normalized_data, (d) ->
+            return d3.max d, (d) ->
+              return d.y0 + d.y;
+        ])
+        .range([h-padding.bottom-padding.top,0])
+
+        xAxis.scale(xScale)
+          .ticks(d3.time.hour,2)
+          .tickFormat(d3.time.format("%H"))
+
+        yAxis.scale(yScale)
+          .orient("left")
+          .ticks(10)
+
+        groups = svg.selectAll(".rgroups")
+          .data(normalized_data)
+
+        groups.enter()
+          .append("g")
+          .attr("class","rgroups")
+          .attr("transform","translate(#{padding.left},#{ (h - padding.bottom) })")
+          .style "fill", (d,i) ->
+            return color_hash[normalized_data.indexOf(d)][1]
+
+        rect = groups.selectAll("rect")
+          .data (d) ->
+            return d
+
+        console.log rect
+
+        rect.enter()
+          .append("rect")
+          .attr("x",w)
+          .attr("width",1)
+          .style("fill-opacity",1e-6)
+
+        rect.transition()
+          .duration(1000)
+          .ease("linear")
+          .attr "x",(d) ->
+              return xScale(new Date(0, 0, 0,d.time,0, 0, 0));
+          .attr "y", (d) ->
+              return -(- yScale(d.y0) - yScale(d.y) + (h - padding.top - padding.bottom)*2);
+          .attr "height", (d) ->
+              return -yScale(d.y) + (h - padding.top - padding.bottom);
+          .attr("width",15)
+          .style("fill-opacity",1)
+
+          rect.exit()
+            .transition()
+            .duration(1000)
+            .ease("circle")
+            .attr("x",w)
+            .remove()
+
+          groups.exit()
+            .transition()
+            .duration(1000)
+            .ease("circle")
+            .attr("x",w)
+            .remove()
+
+
+          svg.select(".x.axis")
+            .transition()
+            .duration(1000)
+            .ease("circle")
+            .call(xAxis)
+
+          svg.select(".y.axis")
+            .transition()
+            .duration(1000)
+            .ease("circle")
+            .call(yAxis)
+
+      )
 
 
 

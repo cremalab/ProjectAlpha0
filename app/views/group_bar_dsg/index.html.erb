@@ -1,16 +1,18 @@
-<% javascript_include_tag "http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js" -%>
 
 <h1>Task Board Break Down</h1>
-<div class="btn-group pull-right">
-  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-     Messages per hour <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <% @active_task_boards.each do |active_task_board|-%>
-      <li><a class="m" value="<%= active_task_board.name%>" href="#"><%= active_task_board.name%></a></li>
+<div>
+  <div class="btn-group pull-right">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+       Messages per hour <span class="caret"></span>
+    </button>
+      <ul class="dropdown-menu" role="menu">
+        <% @active_task_boards.each do |active_task_board|-%>
+          <li><a class="m" value="<%= active_task_board.name%>" href="#"><%= active_task_board.name%></a></li>
+        <% end -%>
+        <li><a class="m" value="something" href="#">somthing</a></li>
 
-    <% end -%>
-  </ul>
-</div>
-<div id="mbars">
+      </ul>
+  </div>
+  <div id="mbars">
+  </div>
 </div>
