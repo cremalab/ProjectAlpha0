@@ -2,78 +2,59 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
+  w = 900
+  h = 500
+  xScale = null
+  yScale = null
+  xAxis = null
+  yAxis = null
+  all_data = null
+  svg = null
+  color_hash = null
+
+  padding = {top: 100, right: 150, bottom: 100, left:100}
+
+
   $.getJSON '/daily_stage_values','json', (data) ->
-    w = 900
-    h = 500
-    padding = {top: 100, right: 150, bottom: 100, left:100}
-    stack = d3.layout.stack(data)
+    all_data = data
+
+    normalized_data = setup_data(all_data, "LC - Task Board")
 
     color_hash = {
-      7: ["(No Heading)", "#98B296"]
+      7: ["(No Heading)", "#98B296"],
       6: ["To Do", "#71936F"],
+      8: ["To Do", "#71936F"],
+      9: ["On Hold", "#DAB8B9"]
       5: ["In Progress", "#527950"],
       4: ["Merged", "#325230"],
       3: ["Deployed - Staging", "#DAB8B9"],
       2: ["Ready for Production", "#B48889"],
       1: ["Deployed - Production", "#936264"],
-      0: ["Done", "#653A3C"],
-    }
-
-    data_structure = {
-      "Done": [],
-      "Deployed - Production": [],
-      "Ready for Production": [],
-      "Deployed - Staging": [],
-      "Merged": [],
-      "In Progress": [],
-      "To do": [],
-      "(No Heading)": []
+      0: ["Done", "#653A3C"]
     }
 
 
-    for i in [0..data.length - 1]
-      if data[i].task_board.name == "LC - Task Board"
-        data_structure[data[i].name].push data[i]
+    first_date = new Date(normalized_data[0][0].created_at)
 
-    final_structure = []
-    for k, v of data_structure
-      final_structure.push v
-
-    # Set up scales
-
-
-    for i in [0..final_structure.length - 1]
-      for j in [0..final_structure[i].length - 1]
-        final_structure[i][j].y = final_structure[i][j].total_hours
-        console.log final_structure[i][j].created_at
-        final_structure[i][j].time = new Date(final_structure[i][j].created_at).setHours(0, 0, 0)
-
-    stack(final_structure)
-
-    first_date = new Date(final_structure[0][0].created_at)
-
-    last_date = new Date(final_structure[0][final_structure[0].length-1].created_at)
+    last_date = new Date(normalized_data[0][normalized_data[0].length-1].created_at)
 
     xScale = d3.time.scale()
       .domain([d3.time.day.offset(last_date,-14), last_date])
       .rangeRound([0, w - padding.left - padding.right])
 
-    console.log xScale
-
     yScale = d3.scale.linear()
       .domain([0,
-        d3.max final_structure, (d)  ->
+        d3.max normalized_data, (d)  ->
             return d3.max d, (d) ->
               return d.y + d.y0;
       ])
-      .range([h-padding.bottom-padding.top,0]);
+      .range([h-padding.bottom-padding.top,0])
 
 
     xAxis = d3.svg.axis()
       .scale(xScale)
       .orient("bottom")
       .ticks(d3.time.days,1)
-      # .tickPadding(5)
 
     yAxis = d3.svg.axis()
       .scale(yScale)
@@ -87,26 +68,19 @@ $ ->
       .attr("width", w)
       .attr("height", h)
 
-
-    console.log final_structure
-
-    console.log svg.selectAll("g").data()
-
-
     groups = svg.selectAll("g")
-      .data(final_structure)
+      .data(normalized_data)
       .enter()
       .append("g")
       .attr("class", "rgroups")
       .attr("transform", "translate(" + padding.left + "," + (h - padding.bottom) + ")")
       .style("fill", (d, i) ->
-        return color_hash[final_structure.indexOf(d)][1]
+        return color_hash[normalized_data.indexOf(d)][1]
       )
 
 
     rects = groups.selectAll("rect")
         .data (d) ->
-          console.log d
           return d
         .enter()
         .append("rect")
@@ -136,7 +110,7 @@ $ ->
       svg.append("g")
         .attr("class","y axis")
         .attr("transform","translate(" + padding.left + "," + padding.top + ")")
-        .call(yAxis);
+        .call(yAxis)
 
 
       # Adding a legend
@@ -147,7 +121,7 @@ $ ->
         .attr("height", 100)
         .attr("width",100)
 
-      legend.selectAll("g").data(final_structure)
+      legend.selectAll("g").data(normalized_data)
         .enter()
         .append('g')
         .each (d,i) ->
@@ -175,11 +149,144 @@ $ ->
         .text("Total Project Hours")
 
       svg.append("text")
-         .attr("class","xtext")
-         .attr("x",w/2 - padding.left)
-         .attr("y",h - 55)
-         .attr("text-anchor","middle")
-         .text("Days")
+        .attr("class","xtext")
+        .attr("x",w/2 - padding.left)
+        .attr("y",h - 55)
+        .attr("text-anchor","middle")
+        .text("Days")
+
+      svg.append("text")
+        .attr("class","title")
+        .attr("x", (w / 2))
+        .attr("y", 20)
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text("LC - Task Board")
+
+
+      d3.selectAll(".m").on "click", change
+
+  change = () ->
+    project = this.getAttribute("value")
+    normalized_data = setup_data(all_data, project)
+
+    first_date = new Date(normalized_data[0][0].created_at)
+
+    last_date = new Date(normalized_data[0][normalized_data[0].length-1].created_at)
+
+
+    xScale
+      .domain([d3.time.day.offset(last_date,-14), last_date])
+      .rangeRound([0, w - padding.left - padding.right])
+
+    yScale
+      .domain([0,
+        d3.max normalized_data, (d)  ->
+            return d3.max d, (d) ->
+              return d.y + d.y0;
+      ])
+      .range([h-padding.bottom-padding.top,0])
+
+    xAxis
+      .scale(xScale)
+      .orient("bottom")
+      .ticks(d3.time.days,1)
+
+    yAxis
+      .scale(yScale)
+      .orient("left")
+      .ticks(10)
+
+
+    groups = svg.selectAll(".rgroups")
+          .data(normalized_data)
+
+          groups.enter()
+            .append("g")
+            .attr("class","rgroups")
+            .attr("transform","translate(#{padding.left},#{ (h - padding.bottom) })")
+            .style "fill", (d,i) ->
+              return color_hash[normalized_data.indexOf(d)][1]
+
+
+
+          rect = groups.selectAll("rect")
+            .data (d) ->
+              return d
+
+        rect.transition()
+          .duration(1000)
+          .ease("linear")
+          .attr "x", (d) ->
+              return xScale(new Date(d.time)) - 9
+          .attr "y", (d) ->
+            return -(- yScale(d.y0) - yScale(d.y) + (h - padding.top - padding.bottom)*2);
+          .attr "height", (d) ->
+            return -yScale(d.total_hours) + (h - padding.top - padding.bottom)
+          .attr("width", 15)
+          .style("fill-opacity",1)
+
+
+
+    svg.select(".x axis")
+      .transition()
+      .duration(1000)
+      .ease("circle")
+      .call(xAxis)
+
+    svg.select(".y axis")
+      .transition()
+      .duration(1000)
+      .ease("circle")
+      .call(yAxis)
+
+    svg.select(".title")
+      .transition()
+      .duration(1000)
+      .text(project)
+
+
+
+
+
+
+
+setup_data = (data, task_board) ->
+  stack = d3.layout.stack(data)
+  data_structure = {
+    "Done": [],
+    "Deployed - Production": [],
+    "Ready for Production": [],
+    "Verify": [],
+    "Deployed - Staging": [],
+    "Merged": [],
+    "In Progress": [],
+    "To do": [],
+    "To-Do": [],
+    "(No Heading)": []
+  }
+
+
+  for i in [0..data.length - 1]
+    if data[i].task_board.name == task_board
+      data_structure[data[i].name].push data[i]
+
+  final_structure = []
+  for k, v of data_structure
+    if v.length > 0
+      final_structure.push v
+
+  # Set up scales
+
+
+  for i in [0..final_structure.length - 1]
+    for j in [0..final_structure[i].length - 1]
+      final_structure[i][j].y = final_structure[i][j].total_hours
+      final_structure[i][j].time = new Date(final_structure[i][j].created_at).setHours(0, 0, 0)
+
+  stack(final_structure)
+
 
 
 
