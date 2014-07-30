@@ -3,11 +3,11 @@
 <div>
   <div class="btn-group pull-right">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-       Messages per hour <span class="caret"></span>
+       Change Project <span class="caret"></span>
     </button>
       <ul class="dropdown-menu" role="menu">
         <% @active_task_boards.each do |active_task_board|-%>
-          <li><a class="m" value="<%= active_task_board.name%>" href="#"><%= active_task_board.name%></a></li>
+          <li><a class="m" value="<%= active_task_board.name%>"><%= active_task_board.name%></a></li>
         <% end -%>
         <li><a class="m" value="something" href="#">somthing</a></li>
 
