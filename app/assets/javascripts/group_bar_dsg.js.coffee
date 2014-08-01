@@ -254,6 +254,7 @@ $ ->
 
 setup_data = (data, task_board) ->
   stack = d3.layout.stack(data)
+  console.log "Here"
   data_structure = {
     "Done": [],
     "Deployed - Production": [],
@@ -267,11 +268,13 @@ setup_data = (data, task_board) ->
     "(No Heading)": []
   }
 
+  console.log "Here"
 
   for i in [0..data.length - 1]
     if data[i].task_board.name == task_board
       data_structure[data[i].name].push data[i]
 
+  console.log "Here"
   final_structure = []
   for k, v of data_structure
     if v.length > 0
@@ -279,7 +282,7 @@ setup_data = (data, task_board) ->
 
   # Set up scales
 
-
+  console.log "Here"
   for i in [0..final_structure.length - 1]
     for j in [0..final_structure[i].length - 1]
       final_structure[i][j].y = final_structure[i][j].total_hours
