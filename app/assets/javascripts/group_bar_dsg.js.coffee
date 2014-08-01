@@ -248,47 +248,41 @@ $ ->
       .duration(1000)
       .text(project)
 
+  setup_data = (data, task_board) ->
+    stack = d3.layout.stack(data)
+    data_structure = {
+      "Done": [],
+      "Deployed - Production": [],
+      "Ready for Production": [],
+      "Verify": [],
+      "Deployed - Staging": [],
+      "Merged": [],
+      "In Progress": [],
+      "To do": [],
+      "To-Do": [],
+      "(No Heading)": []
+    }
 
 
+    for i in [0..data.length - 1]
+      if data[i].task_board.name == task_board
+        data_structure[data[i].name].push data[i]
 
+    final_structure = []
+    for k, v of data_structure
+      if v.length > 0
+        final_structure.push v
 
+    # Set up scales
 
+    for i in [0..final_structure.length - 1]
+      for j in [0..final_structure[i].length - 1]
+        final_structure[i][j].y = final_structure[i][j].total_hours
+        final_structure[i][j].time = new Date(final_structure[i][j].created_at).setHours(0, 0, 0)
 
-setup_data = (data, task_board) ->
-  stack = d3.layout.stack(data)
-  data_structure = {
-    "Done": [],
-    "Deployed - Production": [],
-    "Ready for Production": [],
-    "Verify": [],
-    "Deployed - Staging": [],
-    "Merged": [],
-    "In Progress": [],
-    "To do": [],
-    "To-Do": [],
-    "(No Heading)": []
-  }
-
-
-  for i in [0..data.length - 1]
-    if data[i].task_board.name == task_board
-      data_structure[data[i].name].push data[i]
-
-  final_structure = []
-  for k, v of data_structure
-    if v.length > 0
-      final_structure.push v
-
-  # Set up scales
-
-  for i in [0..final_structure.length - 1]
-    for j in [0..final_structure[i].length - 1]
-      final_structure[i][j].y = final_structure[i][j].total_hours
-      final_structure[i][j].time = new Date(final_structure[i][j].created_at).setHours(0, 0, 0)
-
-  console.log final_structure
-  stack(final_structure)
-  console.log "Here"
+    console.log final_structure
+    stack(final_structure)
+    console.log "Here"
 
 
 
