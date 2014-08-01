@@ -17,9 +17,10 @@ $ ->
 
   $.getJSON '/daily_stage_values','json', (data) ->
     all_data = data
-    console.log all_data
 
     normalized_data = setup_data(all_data, "LC - Task Board")
+
+    console.log normalized_data
 
     color_hash = {
       7: ["(No Heading)", "#98B296"],
