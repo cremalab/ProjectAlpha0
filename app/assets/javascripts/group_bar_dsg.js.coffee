@@ -288,6 +288,7 @@ setup_data = (data, task_board) ->
 
   console.log final_structure
   stack(final_structure)
+  console.log "Here"
 
 
 
