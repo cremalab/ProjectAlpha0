@@ -18,7 +18,7 @@ $ ->
   $.getJSON '/daily_stage_values','json', (data) ->
     all_data = data
 
-    normalized_data = setup_data(all_data, "LC - Task Board")
+    normalized_data = setup_data(all_data, "LC - Task Board", "10522531819751")
 
     console.log normalized_data
 
@@ -170,8 +170,9 @@ $ ->
       d3.selectAll(".m").on "click", change
 
   change = () ->
-    project = this.getAttribute("value")
-    normalized_data = setup_data(all_data, project)
+    project = this.getAttribute("data-name")
+    id = this.getAttribute("data-id")
+    normalized_data = setup_data(all_data, project, id)
 
     first_date = new Date(normalized_data[0][0].created_at)
 
@@ -248,7 +249,7 @@ $ ->
       .duration(1000)
       .text(project)
 
-  setup_data = (data, task_board) ->
+  setup_data = (data, task_board, stripe_id) ->
     stack = d3.layout.stack(data)
     data_structure = {
       "Done": [],
@@ -263,9 +264,9 @@ $ ->
       "(No Heading)": []
     }
 
-
     for i in [0..data.length - 1]
-      if data[i].task_board.name == task_board
+      if data[i].task_board.name == task_board and data[i].task_board.stripe_id == stripe_id
+        console.log data[0].task_board.stripe_id
         data_structure[data[i].name].push data[i]
 
     final_structure = []
@@ -274,7 +275,7 @@ $ ->
         final_structure.push v
 
     # Set up scales
-
+    console.log final_structure
     for i in [0..final_structure.length - 1]
       for j in [0..final_structure[i].length - 1]
         final_structure[i][j].y = final_structure[i][j].total_hours
@@ -282,7 +283,6 @@ $ ->
 
     console.log final_structure
     stack(final_structure)
-    console.log "Here"
 
 
 

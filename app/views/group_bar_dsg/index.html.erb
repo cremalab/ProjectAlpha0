@@ -7,7 +7,7 @@
     </button>
       <ul class="dropdown-menu" role="menu">
         <% @active_task_boards.each do |active_task_board|-%>
-          <li><a class="m" value="<%= active_task_board.name%>"><%= active_task_board.name%></a></li>
+          <li><a class="m" data-name="<%= active_task_board.name%>" data-id="<%= active_task_board.stripe_id%>"><%= active_task_board.name%></a></li>
         <% end -%>
         <li><a class="m" value="something" href="#">somthing</a></li>
 
