@@ -174,6 +174,8 @@ $ ->
     id = this.getAttribute("data-id")
     normalized_data = setup_data(all_data, project, id)
 
+    console.log normalized_data
+
     first_date = new Date(normalized_data[0][0].created_at)
 
     last_date = new Date(normalized_data[0][normalized_data[0].length-1].created_at)
