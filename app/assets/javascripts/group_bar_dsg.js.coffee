@@ -23,25 +23,25 @@ $ ->
     console.log normalized_data
 
     color_hash = {
-      7: ["(No Heading)", "#98B296"],
+      9: ["(No Heading)", "#98B296"],
+      8: ["On Hold", "#000000"]
+      7: ["To-Do", "#71936F"],
       6: ["To Do", "#71936F"],
-      8: ["To Do", "#71936F"],
-      9: ["On Hold", "#DAB8B9"]
       5: ["In Progress", "#527950"],
       4: ["Merged", "#325230"],
       3: ["Deployed - Staging", "#DAB8B9"],
       2: ["Ready for Production", "#B48889"],
       1: ["Deployed - Production", "#936264"],
-      0: ["Done", "#653A3C"]
+      0: ["Done", "#653A3C"],
     }
 
 
-    first_date = new Date(normalized_data[0][0].created_at)
+    first_date = new Date(normalized_data[0][normalized_data[0].length-13].created_at)
 
     last_date = new Date(normalized_data[0][normalized_data[0].length-1].created_at)
 
     xScale = d3.time.scale()
-      .domain([d3.time.day.offset(last_date,-14), last_date])
+      .domain([d3.time.day.offset(last_date,-13), last_date])
       .rangeRound([0, w - padding.left - padding.right])
 
     yScale = d3.scale.linear()
@@ -91,7 +91,7 @@ $ ->
 
     rects.transition()
       .duration (d,i) ->
-        return 500 * i;
+        return 250 * i;
       .ease("linear")
       .attr "x", (d) ->
           return xScale(new Date(d.time)) - 9
@@ -221,7 +221,7 @@ $ ->
               return d
 
         rect.transition()
-          .duration(1000)
+          .duration(500)
           .ease("linear")
           .attr "x", (d) ->
               return xScale(new Date(d.time)) - 9
@@ -231,6 +231,34 @@ $ ->
             return -yScale(d.total_hours) + (h - padding.top - padding.bottom)
           .attr("width", 15)
           .style("fill-opacity",1)
+
+      legend = svg.append("g")
+        .attr("class","legend")
+        .attr("x", w - padding.right - 65)
+        .attr("y", 25)
+        .attr("height", 100)
+        .attr("width",100)
+
+      legend.selectAll("g").data(normalized_data)
+        .enter()
+        .append('g')
+        .each (d,i) ->
+          g = d3.select(this);
+          g.append("rect")
+            .attr("x", w - padding.right + 0)
+            .attr("y", i*25 + 10)
+            .attr("width", 10)
+            .attr("height",10)
+            .style("fill",color_hash[String(i)][1])
+
+          g.append("text")
+           .attr("x", w - padding.right + 15)
+           .attr("y", i*25 + 20)
+           .attr("height",30)
+           .attr("width",100)
+           .style("fill",color_hash[String(i)][1])
+           .text(color_hash[String(i)][0])
+
 
 
 
@@ -263,12 +291,13 @@ $ ->
       "In Progress": [],
       "To do": [],
       "To-Do": [],
+      "On Hold": [],
       "(No Heading)": []
     }
 
     for i in [0..data.length - 1]
       if data[i].task_board.name == task_board and data[i].task_board.stripe_id == stripe_id
-        console.log data[0].task_board.stripe_id
+        console.log data[i].name
         data_structure[data[i].name].push data[i]
 
     final_structure = []
