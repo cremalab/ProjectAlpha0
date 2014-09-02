@@ -23,13 +23,14 @@ $ ->
     console.log normalized_data
 
     color_hash = {
-      9: ["(No Heading)", "#98B296"],
-      8: ["On Hold", "#000000"]
-      7: ["To-Do", "#71936F"],
-      6: ["To Do", "#71936F"],
-      5: ["In Progress", "#527950"],
-      4: ["Merged", "#325230"],
-      3: ["Deployed - Staging", "#DAB8B9"],
+      10: ["(No Heading)", "#98B296"],
+      9: ["On Hold", "#000000"]
+      8: ["To-Do", "#71936F"],
+      7: ["To Do", "#71936F"],
+      6: ["In Progress", "#527950"],
+      5: ["Merged", "#325230"],
+      4: ["Deployed - Staging", "#DAB8B9"],
+      3: ["Verify", "#DAB8B9"]
       2: ["Ready for Production", "#B48889"],
       1: ["Deployed - Production", "#936264"],
       0: ["Done", "#653A3C"],
