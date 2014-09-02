@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TaskBoardsControllerTest < ActionController::TestCase
   setup do
-    @task_board = task_boards(:one)
+    @task_board = task_boards(:generic_board)
   end
 
   test "should get index" do
@@ -17,9 +17,7 @@ class TaskBoardsControllerTest < ActionController::TestCase
   end
 
   test "should create task_board" do
-    assert_difference('TaskBoard.count') do
-      post :create, task_board: {  }
-    end
+    post :create, task_board: { active: true }
 
     assert_redirected_to task_board_path(assigns(:task_board))
   end
@@ -35,7 +33,7 @@ class TaskBoardsControllerTest < ActionController::TestCase
   end
 
   test "should update task_board" do
-    patch :update, id: @task_board, task_board: {  }
+    patch :update, id: @task_board, task_board: { active: true }
     assert_redirected_to task_board_path(assigns(:task_board))
   end
 

@@ -42,6 +42,8 @@ gem "devise"
 
 gem "d3-rails"
 
+gem "vcr", "~>2.9.2"
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

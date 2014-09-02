@@ -21,7 +21,7 @@
         <td><%= task.name%></td>
         <td><%= task.stage%></td>
         <td><%= task.assigned_hour%></td>
-        <td><%= task.task_board.name%></td>
+        <td><%= task.task_board.name if task.task_board %></td>
         <td><%= task.created_at%></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>

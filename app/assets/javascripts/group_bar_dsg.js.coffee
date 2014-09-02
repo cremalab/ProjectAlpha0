@@ -17,6 +17,7 @@ $ ->
 
   $.getJSON '/daily_stage_values','json', (data) ->
     all_data = data
+    console.log all_data
 
     normalized_data = setup_data(all_data, "LC - Task Board", "10522531819751")
 
@@ -297,6 +298,7 @@ $ ->
     }
 
     for i in [0..data.length - 1]
+      console.log data
       if data[i].task_board.name == task_board and data[i].task_board.stripe_id == stripe_id
         console.log data[i].name
         data_structure[data[i].name].push data[i]

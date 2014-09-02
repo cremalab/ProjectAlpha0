@@ -6,7 +6,8 @@ class DailyStageValuesController < ApplicationController
   def index
     if params[:task_board_id]
       @daily_stage_values = TaskBoard.find(params[:task_board_id]).daily_stage_values
-      @daily_stage_values = @daily_stage_values.where(created_at: 14.day.ago..Date.today)
+      last_date = @daily_stage_values.order("created_at DESC").first
+      @daily_stage_values = @daily_stage_values.where(created_at: 14.day.ago..last_date)
     else
       @daily_stage_values = DailyStageValue.where(created_at: 14.day.ago..Date.today)
     end

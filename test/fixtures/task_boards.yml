@@ -4,8 +4,16 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
+generic_board:
+  stripe_id: "4949494lfk"
+  name: "Generic Task Board"
+  active: true
+
+sparse_board:
+  stripe_id: "4949494lfk"
+  name: "Generic Task Board"
+  active: true
+
+
 two: {}
 #  column: value

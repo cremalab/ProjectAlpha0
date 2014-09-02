@@ -9,3 +9,611 @@ one: {}
 #
 two: {}
 #  column: value
+
+## Generic Board DSV
+todo_1:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+
+todo_2:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 20
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+
+todo_3:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 30
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+
+todo_4:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 40
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+
+todo_5:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 50
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+
+todo_6:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 60
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+
+todo_7:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 70
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+
+todo_8:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 80
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+
+todo_9:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 90
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 9.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 9.day%>"
+
+todo_10:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 100
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+
+todo_11:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 110
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+
+todo_12:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 120
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+
+todo_13:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 130
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+
+todo_14:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 140
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+
+todo_15:
+  name: "To-Do"
+  task_board: generic_board
+  total_hours: 150
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+
+inprog_1:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+
+inprog_2:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+
+inprog_3:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+
+inprog_4:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+
+inprog_5:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+
+inprog_6:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+
+inprog_7:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+
+inprog_8:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+
+inprog_9:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 9.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 9.day%>"
+
+inprog_10:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+
+inprog_11:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+
+inprog_12:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+
+inprog_13:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+
+inprog_14:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+
+inprog_15:
+  name: "In Progress"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+
+done_1:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+
+done_2:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+
+done_3:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+
+done_4:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+
+done_5:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+
+done_6:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+
+done_7:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+
+done_8:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+
+done_9:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 9.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 9.day%>"
+
+done_10:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+
+done_11:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+
+done_12:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+
+done_13:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+
+done_14:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+
+done_15:
+  name: "Done"
+  task_board: generic_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+
+## Sparse Board DSV
+sp_todo_1:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+
+sp_todo_2:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 20
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+
+sp_todo_3:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 30
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+
+sp_todo_4:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 40
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+
+sp_todo_5:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 50
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+
+sp_todo_6:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 60
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+
+sp_todo_7:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 70
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+
+sp_todo_8:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 80
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+
+sp_todo_9:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 90
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 9.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 9.day%>"
+
+sp_todo_10:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 100
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+
+sp_todo_11:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 110
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+
+sp_todo_13:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 130
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+
+sp_todo_14:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 140
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+
+sp_todo_15:
+  name: "To-Do"
+  task_board: sparse_board
+  total_hours: 150
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+
+sp_inprog_1:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+
+sp_inprog_2:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+
+sp_inprog_3:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 3.day%>"
+
+sp_inprog_4:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+
+sp_inprog_5:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+
+sp_inprog_6:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+
+sp_inprog_7:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+
+sp_inprog_8:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+
+sp_inprog_10:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+
+sp_inprog_11:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+
+sp_inprog_12:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+
+sp_inprog_13:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+
+sp_inprog_14:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+
+sp_inprog_15:
+  name: "In Progress"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+
+sp_done_1:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 1.day%>"
+
+sp_done_2:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 2.day%>"
+
+sp_done_4:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 4.day%>"
+
+sp_done_5:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 5.day%>"
+
+sp_done_6:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 6.day%>"
+
+sp_done_7:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 7.day%>"
+
+sp_done_8:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 8.day%>"
+
+sp_done_10:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 10.day%>"
+
+sp_done_11:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 11.day%>"
+
+sp_done_12:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 12.day%>"
+
+sp_done_13:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 13.day%>"
+
+sp_done_14:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 14.day%>"
+
+sp_done_15:
+  name: "Done"
+  task_board: sparse_board
+  total_hours: 10
+  created_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+  updated_at: "<%= DateTime.now.in_time_zone.beginning_of_day - 15.day%>"
+
+
+
+
